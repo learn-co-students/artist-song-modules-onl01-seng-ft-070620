@@ -1,6 +1,7 @@
 require 'pry'
 class Artist
-  extend Memorable
+  include Memorable::InstanceMethods
+  extend Memorable::ClassMethods
   extend Findable
   include Paramable
   attr_accessor :name
@@ -9,7 +10,8 @@ class Artist
   @@artists = []
   @songs = []
   def initialize
-    self.class.all << self
+    super
+    @songs = []
   end
 
   def self.all
